@@ -54,15 +54,14 @@ class Board
     toggle_next_symbol
   end
 
-  def check_for_win
+  def check_for_winner
     WINNING_SEQUENCES.each do |sequence|
       if (@cells[sequence[0]] == @cells[sequence[1]]) &&
          (@cells[sequence[0]] == @cells[sequence[2]]) &&
          (@cells[sequence[0]] != " ")
-        return true
+        return return @cells[sequence[0]]
       end
     end
-    false
   end
 
   def to_s
@@ -72,4 +71,47 @@ class Board
     "---------\n" \
     "#{@cells[6]} | #{@cells[7]} | #{@cells[8]}"
   end
+end
+
+class TicTacToe
+  def initialize
+    @board = Board.new
+    @winner = " "
+    @turn = 0
+  end
+
+  def print_instructions
+    puts "Make a selection by typing in a cell number:\n\n" \
+    "1 | 2 | 3\n" \
+    "---------\n" \
+    "4 | 5 | 6\n" \
+    "---------\n" \
+    "7 | 8 | 9\n\n" \
+    "First to make a line of three wins!"
+  end
+
+  def get_player_input
+    print "Make your selection: "
+    while 1
+      selection = gets.match(/\d/).to_i
+      if (selection < 1) || (selection > 9)
+        puts "Selection out of range!\n" \
+        "Make another selection:"
+        next
+      end
+
+      unless board.move(selection)
+        puts "Invalid selection!\n" \
+        "Make another selection:"
+        next
+      end
+
+      break
+    end
+  end
+
+  def print_result(winner)
+    puts "The winner is #{winner}! Well done!"
+  end
+
 end
