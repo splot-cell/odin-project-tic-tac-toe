@@ -76,8 +76,8 @@ class TicTacToe
 
   def get_player_input
     print "Make your selection: "
-    while 1
-      selection = gets.scan(/\d/).first.to_i
+    loop do
+      selection = gets.to_i
       if (selection < 1) || (selection > 9)
         puts "Selection out of range!\n" \
         "Make another selection:"
