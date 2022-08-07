@@ -1,30 +1,13 @@
-# Create board
-# Print instructions
-# Begin LOOP
-#   Ask for P1 input (Use P1/P2 toggle)
-#   Check for duplicated move
-#   Check for win
-#   Check if board is full -> DRAW
-#   Print updated board
-#   Ask for P2 input
-#   Check for duplicated move
-#   Check for win
-#   Print updated board
-# END loop
-
-# Game class
-# Contains program flow data for interacting with board object
-
 class Board
   WINNING_SEQUENCES = [
-    [1, 2, 3],
-    [4, 5, 6],
-    [7, 8, 9],
+    [0, 1, 2],
+    [3, 4, 5],
+    [6, 7, 8],
+    [0, 3, 6],
     [1, 4, 7],
     [2, 5, 8],
-    [3, 6, 9],
-    [1, 5, 9],
-    [3, 5, 7]
+    [0, 4, 8],
+    [2, 4, 6]
   ].freeze
 
   def initialize
@@ -59,9 +42,10 @@ class Board
       if (@cells[sequence[0]] == @cells[sequence[1]]) &&
          (@cells[sequence[0]] == @cells[sequence[2]]) &&
          (@cells[sequence[0]] != " ")
-        return return @cells[sequence[0]]
+        return @cells[sequence[0]]
       end
     end
+    nil
   end
 
   def to_s
@@ -93,14 +77,14 @@ class TicTacToe
   def get_player_input
     print "Make your selection: "
     while 1
-      selection = gets.match(/\d/).to_i
+      selection = gets.scan(/\d/).first.to_i
       if (selection < 1) || (selection > 9)
         puts "Selection out of range!\n" \
         "Make another selection:"
         next
       end
 
-      unless board.move(selection)
+      unless @board.move(selection)
         puts "Invalid selection!\n" \
         "Make another selection:"
         next
@@ -111,7 +95,30 @@ class TicTacToe
   end
 
   def print_result(winner)
-    puts "The winner is #{winner}! Well done!"
+    if winner
+      puts "The winner is #{winner}! Well done!"
+    else
+      puts "It's a draw this time!"
+    end
   end
 
+  def game_loop
+    while @turn < 9
+      get_player_input
+      puts "#{@board}\n\n"
+      if (winner = @board.check_for_winner)
+        return winner
+      end
+
+      @turn += 1
+    end
+  end
+
+  def run_game
+    print_instructions
+    print_result(game_loop)
+  end
 end
+
+game = TicTacToe.new
+game.run_game
