@@ -24,16 +24,32 @@ describe Board do
       end
 
       context "across bottom row" do
-
+        it "returns 'X'" do
+          winning_positions = [" ", " ", " ", " ", " ", " ", "X", "X", "X"]
+          board_x_win.instance_variable_set(:@cells, winning_positions)
+          expect(board_x_win.check_for_winner).to be("X")
+        end
       end
 
       context "down left column" do
+        it "returns 'X'" do
+          winning_positions = [" ", " ", "X", " ", " ", "X", " ", " ", "X"]
+          board_x_win.instance_variable_set(:@cells, winning_positions)
+          expect(board_x_win.check_for_winner).to be("X")
+        end
       end
-
 
       context "down right column" do
         it "returns 'X'" do
           winning_positions = [" ", " ", "X", " ", " ", "X", " ", " ", "X"]
+          board_x_win.instance_variable_set(:@cells, winning_positions)
+          expect(board_x_win.check_for_winner).to be("X")
+        end
+      end
+
+      context "diagonal right and down" do
+        it "returns 'X'" do
+          winning_positions = ["X", " ", " ", " ", "X", " ", " ", " ", "X"]
           board_x_win.instance_variable_set(:@cells, winning_positions)
           expect(board_x_win.check_for_winner).to be("X")
         end
