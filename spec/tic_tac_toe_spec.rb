@@ -7,6 +7,10 @@ describe Board do
 
   describe "#move" do
     context "when the position is valid" do
+      before do
+        allow(board_init).to receive(:toggle_next_symbol)
+      end
+
       it "updates @cells with position" do
         valid_pos = 5
         old_cells = Array.new(9, " ")
@@ -23,7 +27,9 @@ describe Board do
 
       context "when it is 'O's move" do
         before do
-          board_init.move(5)
+          cells = [" ", " ", " ", " ", "X", " ", " ", " ", " "]
+          board_init.instance_variable_set(:@next_symbol, "O")
+          board_init.instance_variable_set(:@cells, cells)
         end
 
         it "updates the @cells with '0'" do
@@ -38,6 +44,7 @@ describe Board do
     context "when the position is invalid" do
       before do
         board_init.move(5)
+        allow(board_init).to receive(:toggle_next_symbol)
       end
 
       it "does not update @cells" do
