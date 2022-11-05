@@ -15,10 +15,28 @@ describe Board do
     context "when 'X' has won" do
       subject(:board_x_win) { described_class.new }
 
-      it "returns 'X'" do
-        winning_positions = ['X', 'X', 'X', ' ', ' ', ' ', ' ', ' ', ' ']
-        board_x_win.instance_variable_set(:@cells, winning_positions)
-        expect(board_x_win.check_for_winner).to be('X')
+      context "across top row" do
+        it "returns 'X'" do
+          winning_positions = ["X", "X", "X", " ", " ", " ", " ", " ", " "]
+          board_x_win.instance_variable_set(:@cells, winning_positions)
+          expect(board_x_win.check_for_winner).to be("X")
+        end
+      end
+
+      context "across bottom row" do
+
+      end
+
+      context "down left column" do
+      end
+
+
+      context "down right column" do
+        it "returns 'X'" do
+          winning_positions = [" ", " ", "X", " ", " ", "X", " ", " ", "X"]
+          board_x_win.instance_variable_set(:@cells, winning_positions)
+          expect(board_x_win.check_for_winner).to be("X")
+        end
       end
     end
   end

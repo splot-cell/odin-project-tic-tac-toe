@@ -1,7 +1,6 @@
 AllCops:
   Exclude:
     - 'spec/spec_helper.rb'
-  NewCops: enable
 Metrics/BlockLength:
   Exclude:
     - 'spec/*'
@@ -9,3 +8,5 @@ Metrics/BlockLength:
 Layout/LineLength:
   Exclude:
     - 'spec/*'
+Style/StringLiterals:
+  EnforcedStyle: double_quotes
