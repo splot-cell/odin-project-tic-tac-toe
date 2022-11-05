@@ -10,10 +10,10 @@ class Board
     [2, 4, 6]
   ].freeze
 
-  def initialize
-    @cells = Array.new(9, " ")
-    @available_moves = Array.new(9) { |i| i + 1 }
-    @next_symbol = "X"
+  def initialize(cells = Array.new(9, " "), available_moves = Array.new(9) { |i| i + 1 }, next_symbol = "X")
+    @cells
+    @available_moves = available_moves
+    @next_symbol = next_symbol
   end
 
   def toggle_next_symbol
