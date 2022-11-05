@@ -66,6 +66,19 @@ describe Board do
       end
     end
 
+    context "when there is no winner" do
+      subject(:board_no_win) { described_class.new }
+
+      before do
+        no_winning_positions = %w[X O X O X X O X O]
+        board_no_win.instance_variable_set(:@cells, no_winning_positions)
+      end
+
+      it "returns nil" do
+        expect(board_no_win.check_for_winner).to be_nil
+      end
+    end
+
     context "when 'X' has won" do
       subject(:board_x_win) { described_class.new }
 
