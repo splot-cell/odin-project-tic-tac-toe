@@ -13,7 +13,7 @@ class Board
   def initialize
     @cells = Array.new(9, " ")
     @available_moves = Array.new(9) { |i| i + 1 }
-    @next_symbol = 'X'
+    @next_symbol = "X"
   end
 
   def toggle_next_symbol
