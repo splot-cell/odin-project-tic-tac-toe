@@ -11,7 +11,7 @@ class Board
   ].freeze
 
   def initialize(cells = Array.new(9, " "), available_moves = Array.new(9) { |i| i + 1 }, next_symbol = "X")
-    @cells
+    @cells = cells
     @available_moves = available_moves
     @next_symbol = next_symbol
   end
