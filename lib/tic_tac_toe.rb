@@ -58,9 +58,8 @@ class Board
 end
 
 class TicTacToe
-  def initialize
-    @board = Board.new
-    @winner = " "
+  def initialize(board = Board.new)
+    @board = board
     @turn = 0
   end
 
